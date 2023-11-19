@@ -1,4 +1,6 @@
+import 'package:fashion_ecommerce_app/features/authentication/success_screen.dart';
 import 'package:fashion_ecommerce_app/features/widgets/auth_input_text_field_widget.dart';
+import 'package:fashion_ecommerce_app/features/widgets/long_button_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -11,11 +13,17 @@ class SignupScreen extends StatefulWidget {
 
 class _SignupScreenState extends State<SignupScreen> {
   TextEditingController userNameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController confirmpasswordController = TextEditingController();
 
   @override
   void dispose() {
     super.dispose();
     userNameController.dispose();
+    emailController.dispose();
+    passwordController.dispose();
+    confirmpasswordController.dispose();
   }
 
   @override
@@ -24,45 +32,83 @@ class _SignupScreenState extends State<SignupScreen> {
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 25),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SizedBox(
-                    height: 120,
-                    width: 120,
-                    child: Image.asset(
-                      'assets/images/Fashion Nova.png',
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      height: 120,
+                      width: 120,
+                      child: Image.asset(
+                        'assets/images/Fashion Nova.png',
+                      ),
                     ),
+                  ],
+                ),
+                const SizedBox(height: 30),
+                Text(
+                  'Signup',
+                  style: GoogleFonts.poppins(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
                   ),
-                ],
-              ),
-              const SizedBox(height: 30),
-              Text(
-                'Signup',
-                style: GoogleFonts.poppins(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
                 ),
-              ),
-              const SizedBox(height: 30),
-              Text(
-                'Create a new account',
-                style: GoogleFonts.poppins(
-                  fontSize: 14,
-                  fontWeight: FontWeight.bold,
+                const SizedBox(height: 30),
+                Text(
+                  'Create a new account',
+                  style: GoogleFonts.poppins(
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-              ),
-              const SizedBox(height: 30),
-              AuthInputTextField(
-                obscureText: false,
-                labelText: 'User Name',
-                controller: userNameController,
-              ),
-            ],
+                const SizedBox(height: 30),
+                AuthInputTextField(
+                  obscureText: false,
+                  labelText: 'User Name',
+                  controller: userNameController,
+                ),
+                const SizedBox(height: 30),
+                AuthInputTextField(
+                  controller: emailController,
+                  obscureText: false,
+                  labelText: 'Email',
+                ),
+                const SizedBox(height: 30),
+                AuthInputTextField(
+                  controller: passwordController,
+                  obscureText: true,
+                  suffixIcon: const Icon(Icons.visibility_outlined),
+                  labelText: 'Password',
+                ),
+                const SizedBox(height: 30),
+                AuthInputTextField(
+                  controller: confirmpasswordController,
+                  obscureText: true,
+                  suffixIcon: const Icon(Icons.visibility_outlined),
+                  labelText: 'Confirm Password',
+                ),
+                const SizedBox(height: 10),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const SuccessScreen(),
+                      ),
+                    );
+                  },
+                  child: const LongButtonContainer(
+                    buttonName: 'SignUp',
+                    buttonColor: Colors.black,
+                    buttonTextColor: Colors.amberAccent,
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
