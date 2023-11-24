@@ -1,4 +1,6 @@
+import 'package:fashion_ecommerce_app/features/screens/category_screen.dart';
 import 'package:fashion_ecommerce_app/features/widgets/long_button_widget.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -42,10 +44,20 @@ class SuccessScreen extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 80),
-                const LongButtonContainer(
-                  buttonName: 'Start Shopping',
-                  buttonColor: Colors.black,
-                  buttonTextColor: Colors.pinkAccent,
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const BottomnavScreen(),
+                      ),
+                    );
+                  },
+                  child: const LongButtonContainer(
+                    buttonName: 'Start Shopping',
+                    buttonColor: Colors.black,
+                    buttonTextColor: Colors.pinkAccent,
+                  ),
                 ),
               ],
             ),

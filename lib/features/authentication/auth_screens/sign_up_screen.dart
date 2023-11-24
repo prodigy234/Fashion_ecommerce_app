@@ -1,3 +1,4 @@
+import 'package:fashion_ecommerce_app/features/authentication/auth_screens/login_screen.dart';
 import 'package:fashion_ecommerce_app/features/authentication/success_screen.dart';
 import 'package:fashion_ecommerce_app/features/widgets/auth_input_text_field_widget.dart';
 import 'package:fashion_ecommerce_app/features/widgets/long_button_widget.dart';
@@ -25,6 +26,9 @@ class _SignupScreenState extends State<SignupScreen> {
     passwordController.dispose();
     confirmpasswordController.dispose();
   }
+
+  bool isPasswordObscure = true;
+  bool isConfirmPasswordObscure = true;
 
   @override
   Widget build(BuildContext context) {
@@ -81,14 +85,32 @@ class _SignupScreenState extends State<SignupScreen> {
                 AuthInputTextField(
                   controller: passwordController,
                   obscureText: true,
-                  suffixIcon: const Icon(Icons.visibility_outlined),
+                  suffixIcon: InkWell(
+                    onTap: () {
+                      setState(() {
+                        isPasswordObscure = !isPasswordObscure;
+                      });
+                    },
+                    child: isPasswordObscure == true
+                        ? const Icon(Icons.visibility_off_outlined)
+                        : const Icon(Icons.visibility_outlined),
+                  ),
                   labelText: 'Password',
                 ),
                 const SizedBox(height: 30),
                 AuthInputTextField(
                   controller: confirmpasswordController,
                   obscureText: true,
-                  suffixIcon: const Icon(Icons.visibility_outlined),
+                  suffixIcon: InkWell(
+                    onTap: () {
+                      setState(() {
+                        isConfirmPasswordObscure = !isConfirmPasswordObscure;
+                      });
+                    },
+                    child: isConfirmPasswordObscure == true
+                        ? const Icon(Icons.visibility_off_outlined)
+                        : const Icon(Icons.visibility_outlined),
+                  ),
                   labelText: 'Confirm Password',
                 ),
                 const SizedBox(height: 10),
@@ -105,6 +127,27 @@ class _SignupScreenState extends State<SignupScreen> {
                     buttonName: 'SignUp',
                     buttonColor: Colors.black,
                     buttonTextColor: Colors.amberAccent,
+                  ),
+                ),
+                const SizedBox(height: 30),
+                Center(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text("Already have an account?"),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const LoginScreen()));
+                        },
+                        child: Text(
+                          "Login",
+                          style: GoogleFonts.poppins(color: Colors.blue),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ],

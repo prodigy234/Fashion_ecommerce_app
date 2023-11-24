@@ -1,3 +1,5 @@
+import 'package:fashion_ecommerce_app/features/authentication/auth_screens/sign_up_screen.dart';
+import 'package:fashion_ecommerce_app/features/screens/category_screen.dart';
 import 'package:fashion_ecommerce_app/features/widgets/auth_input_text_field_widget.dart';
 import 'package:fashion_ecommerce_app/features/widgets/long_button_widget.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +21,8 @@ class _LoginScreenState extends State<LoginScreen> {
     emailController.dispose();
     passwordController.dispose();
   }
+
+  bool isObscure = true;
 
   @override
   Widget build(BuildContext context) {
@@ -68,15 +72,26 @@ class _LoginScreenState extends State<LoginScreen> {
               const SizedBox(height: 30),
               AuthInputTextField(
                 controller: passwordController,
-                obscureText: true,
-                suffixIcon: const Icon(Icons.visibility_outlined),
+                obscureText: isObscure,
+                suffixIcon: InkWell(
+                  onTap: () {
+                    setState(() {
+                      isObscure = !isObscure;
+                    });
+                  },
+                  child: isObscure == true
+                      ? const Icon(Icons.visibility_off_outlined)
+                      : const Icon(Icons.visibility_outlined),
+                ),
                 labelText: 'Password',
               ),
               const SizedBox(height: 30),
               GestureDetector(
                 onTap: () {
-                  debugPrint(emailController.text);
-                  debugPrint(passwordController.text);
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const BottomnavScreen()));
                 },
                 child: const LongButtonContainer(
                   buttonName: 'Login',
@@ -84,7 +99,28 @@ class _LoginScreenState extends State<LoginScreen> {
                   buttonTextColor: Colors.white,
                 ),
               ),
-              const SizedBox(height: 30),
+              const SizedBox(height: 10),
+              Center(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text("Don't have an account?"),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const SignupScreen()));
+                      },
+                      child: Text(
+                        "Sign up",
+                        style: GoogleFonts.poppins(color: Colors.blue),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 10),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
