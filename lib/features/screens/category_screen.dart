@@ -1,3 +1,4 @@
+import 'package:fashion_ecommerce_app/features/screens/pages/home_screen.dart';
 import 'package:fashion_ecommerce_app/features/widgets/category_container_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -65,34 +66,13 @@ class _BottomnavScreen extends State<BottomnavScreen> {
               label: 'Profile'),
         ],
       ),
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        automaticallyImplyLeading: false,
-        elevation: 0,
-        title: Container(
-          padding: const EdgeInsets.all(5),
-          decoration: const BoxDecoration(
-            color: Colors.black,
-          ),
-          child: const Icon(Icons.arrow_back_ios_new),
-        ),
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(
-              Icons.search,
-              color: Colors.black,
-            ),
-          ),
-        ],
-      ),
       body: SafeArea(child: pages[currentPage]),
     );
   }
 }
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({
+class CategoryScreen extends StatelessWidget {
+  const CategoryScreen({
     super.key,
   });
 

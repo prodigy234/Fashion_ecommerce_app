@@ -1,6 +1,5 @@
 import 'package:fashion_ecommerce_app/features/screens/category_screen.dart';
 import 'package:fashion_ecommerce_app/features/widgets/long_button_widget.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
