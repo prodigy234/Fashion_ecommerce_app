@@ -24,6 +24,46 @@ class _LoginScreenState extends State<LoginScreen> {
 
   bool isObscure = true;
 
+  void login() {
+    var email = emailController.text.trim();
+    var password = passwordController.text.trim();
+    if (email.isEmpty || password.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          backgroundColor: Colors.red,
+          content: Text('Please fill in all fields'),
+        ),
+      );
+    } else if (!email.contains('@') || !email.contains('.')) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          backgroundColor: Colors.red,
+          content: Text('Please enter a valid email'),
+        ),
+      );
+    } else if (password.length < 6) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          backgroundColor: Colors.red,
+          content: Text('Password should be a minimum of 6 characters'),
+        ),
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          backgroundColor: Colors.green,
+          content: Text('Successful login'),
+        ),
+      );
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const BottomnavScreen(),
+        ),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -88,10 +128,7 @@ class _LoginScreenState extends State<LoginScreen> {
               const SizedBox(height: 30),
               GestureDetector(
                 onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const BottomnavScreen()));
+                  login();
                 },
                 child: const LongButtonContainer(
                   buttonName: 'Login',
