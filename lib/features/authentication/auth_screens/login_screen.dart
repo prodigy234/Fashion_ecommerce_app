@@ -64,6 +64,8 @@ class _LoginScreenState extends State<LoginScreen> {
     }
   }
 
+  bool isLoading = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -128,10 +130,13 @@ class _LoginScreenState extends State<LoginScreen> {
               const SizedBox(height: 30),
               GestureDetector(
                 onTap: () {
+                  setState(() {
+                    isLoading = true;
+                  });
                   login();
                 },
-                child: const LongButtonContainer(
-                  buttonName: 'Login',
+                child: LongButtonContainer(
+                  buttonName: isLoading ? 'Loading...' : 'Login',
                   buttonColor: Colors.black,
                   buttonTextColor: Colors.white,
                 ),
