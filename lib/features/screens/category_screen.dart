@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class BottomnavScreen extends StatefulWidget {
-  const BottomnavScreen({super.key});
+  const BottomnavScreen({
+    super.key,
+  });
 
   @override
   State<BottomnavScreen> createState() => _BottomnavScreen();
@@ -12,14 +14,9 @@ class BottomnavScreen extends StatefulWidget {
 
 class _BottomnavScreen extends State<BottomnavScreen> {
   int currentPage = 0;
-  pageIndex(int newPage) {
-    setState(() {
-      currentPage = newPage;
-    });
-  }
 
   List pages = [
-    const HomeScreen(),
+    HomeScreen(),
     const Center(
       child: Text('Shopping page'),
     ),

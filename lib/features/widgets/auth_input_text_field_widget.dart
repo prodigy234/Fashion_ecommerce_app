@@ -8,6 +8,7 @@ class AuthInputTextField extends StatelessWidget {
     this.suffixIcon,
     this.obscureText,
     required this.controller,
+    required String? Function(dynamic name) validate,
   });
   final String labelText;
   final Widget? suffixIcon;

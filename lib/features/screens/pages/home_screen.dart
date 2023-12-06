@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+  const HomeScreen({
+    super.key,
+  });
+  //final String userName;
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -18,15 +22,16 @@ class _HomeScreenState extends State<HomeScreen> {
         title: Container(
           padding: const EdgeInsets.all(5),
           decoration: const BoxDecoration(
-            color: Colors.black,
+            color: Color.fromRGBO(0, 0, 0, 1),
           ),
           child: const Icon(Icons.arrow_back_ios_new),
         ),
       ),
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
                 alignment: Alignment.center,

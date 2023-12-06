@@ -1,7 +1,10 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:fashion_ecommerce_app/features/authentication/auth_screens/sign_up_screen.dart';
 import 'package:fashion_ecommerce_app/features/screens/category_screen.dart';
 import 'package:fashion_ecommerce_app/features/widgets/auth_input_text_field_widget.dart';
 import 'package:fashion_ecommerce_app/features/widgets/long_button_widget.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -22,37 +25,30 @@ class _LoginScreenState extends State<LoginScreen> {
     passwordController.dispose();
   }
 
-  bool isObscure = true;
+  FirebaseAuth firebaseauth = FirebaseAuth.instance;
 
-  void login() {
-    var email = emailController.text.trim();
-    var password = passwordController.text.trim();
-    if (email.isEmpty || password.isEmpty) {
+  login() async {
+    User? currentUser;
+
+    await firebaseauth
+        .signInWithEmailAndPassword(
+            email: emailController.text.trim(),
+            password: passwordController.text.trim())
+        .then((auth) {
+      currentUser = auth.user;
+    }).catchError((error) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
+        SnackBar(
           backgroundColor: Colors.red,
-          content: Text('Please fill in all fields'),
+          content: Text(error.toString()),
         ),
       );
-    } else if (!email.contains('@') || !email.contains('.')) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          backgroundColor: Colors.red,
-          content: Text('Please enter a valid email'),
-        ),
-      );
-    } else if (password.length < 6) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          backgroundColor: Colors.red,
-          content: Text('Password should be a minimum of 6 characters'),
-        ),
-      );
-    } else {
+    });
+    if (currentUser != null) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           backgroundColor: Colors.green,
-          content: Text('Successful login'),
+          content: Text('Login successful'),
         ),
       );
       Navigator.push(
@@ -61,8 +57,19 @@ class _LoginScreenState extends State<LoginScreen> {
           builder: (context) => const BottomnavScreen(),
         ),
       );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          backgroundColor: Colors.red,
+          content: Text('Not logged in'),
+        ),
+      );
     }
   }
+
+  bool isObscure = true;
+
+  final _formKey = GlobalKey<FormState>();
 
   bool isLoading = false;
 
@@ -110,6 +117,14 @@ class _LoginScreenState extends State<LoginScreen> {
                 controller: emailController,
                 obscureText: false,
                 labelText: 'Email',
+                validate: (email) {
+                  if (email == null || email.isEmpty) {
+                    return 'Please enter your email address';
+                  } else if (!email.contains('@') || !email.contains('')) {
+                    return 'Please enter a valid email';
+                  }
+                  return null;
+                },
               ),
               const SizedBox(height: 30),
               AuthInputTextField(
@@ -126,6 +141,14 @@ class _LoginScreenState extends State<LoginScreen> {
                       : const Icon(Icons.visibility_outlined),
                 ),
                 labelText: 'Password',
+                validate: (password) {
+                  if (password == null || password.isEmpty) {
+                    return 'Please enter your password';
+                  } else if (password.length < 6) {
+                    return 'Password must be a minimum of 6 characters';
+                  }
+                  return null;
+                },
               ),
               const SizedBox(height: 30),
               GestureDetector(
@@ -133,7 +156,12 @@ class _LoginScreenState extends State<LoginScreen> {
                   setState(() {
                     isLoading = true;
                   });
-                  login();
+                  if (_formKey.currentState!.validate()) {
+                    login();
+                    setState(() {
+                      isLoading = false;
+                    });
+                  }
                 },
                 child: LongButtonContainer(
                   buttonName: isLoading ? 'Loading...' : 'Login',
