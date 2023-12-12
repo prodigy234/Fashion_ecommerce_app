@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously, body_might_complete_normally_catch_error
+
 import 'package:fashion_ecommerce_app/features/authentication/auth_screens/login_screen.dart';
 import 'package:fashion_ecommerce_app/features/authentication/success_screen.dart';
 import 'package:fashion_ecommerce_app/features/widgets/auth_input_text_field_widget.dart';
@@ -31,6 +33,7 @@ class _SignupScreenState extends State<SignupScreen> {
 
   bool isPasswordObscure = true;
   bool isConfirmPasswordObscure = true;
+  bool isLoading = false;
 
   signUp() async {
     User? currentUser;
@@ -61,7 +64,7 @@ class _SignupScreenState extends State<SignupScreen> {
         ),
       );
       setState(() {
-        var isLoading = false;
+        isLoading = false;
       });
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -178,7 +181,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       buttonTextColor: Colors.amberAccent,
                     ),
                   ),
-                  const SizedBox(height: 30),
+                  const SizedBox(height: 20),
                   Center(
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -193,7 +196,7 @@ class _SignupScreenState extends State<SignupScreen> {
                           },
                           child: Text(
                             "Login",
-                            style: GoogleFonts.poppins(color: Colors.blue),
+                            style: GoogleFonts.poppins(color: Colors.black),
                           ),
                         ),
                       ],

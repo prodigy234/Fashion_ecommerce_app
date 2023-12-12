@@ -16,7 +16,7 @@ class _BottomnavScreen extends State<BottomnavScreen> {
   int currentPage = 0;
 
   List pages = [
-    HomeScreen(),
+    const HomeScreen(),
     const Center(
       child: Text('Shopping page'),
     ),

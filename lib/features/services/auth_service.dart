@@ -16,15 +16,17 @@ class AuthService {
 
     var response = await http.post(Uri.parse(url), body: body);
 
-    debugPrint(body.toString());
     debugPrint(response.statusCode.toString());
 
     final data = jsonDecode(response.body);
-
+    print(data);
     if (response.statusCode == 200) {
+      print(response.body);
+      print(response.statusCode);
       return data;
     } else {
-      debugPrint('Error');
+      print(response.body);
+      print(response.statusCode);
     }
   }
 }
