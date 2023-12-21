@@ -33,7 +33,7 @@ class ThirdOnboardPage extends StatelessWidget {
           height: 20,
         ),
         Text(
-          'Publish up your selfies to make yourself \nmore beautiful with this app',
+          "It's just a single click away \nWhat are you waiting for....",
           style: GoogleFonts.poppins(),
           textAlign: TextAlign.justify,
         ),

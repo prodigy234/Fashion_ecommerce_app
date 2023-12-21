@@ -35,7 +35,7 @@ class FirstOnboardPage extends StatelessWidget {
           height: 20,
         ),
         Text(
-          'Publish up your selfies to make yourself \nmore beautiful with this app',
+          'The best fashion e-commerce app \nmore exciting offers awaiting you on this app',
           style: GoogleFonts.poppins(),
           textAlign: TextAlign.justify,
         ),

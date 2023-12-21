@@ -1,9 +1,11 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:fashion_ecommerce_app/features/authentication/auth_screens/sign_up_screen.dart';
+import 'package:fashion_ecommerce_app/features/screens/category_screen.dart';
 import 'package:fashion_ecommerce_app/features/services/auth_service.dart';
 import 'package:fashion_ecommerce_app/features/widgets/auth_input_text_field_widget.dart';
 import 'package:fashion_ecommerce_app/features/widgets/long_button_widget.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -24,47 +26,47 @@ class _LoginScreenState extends State<LoginScreen> {
     passwordController.dispose();
   }
 
-  // FirebaseAuth firebaseauth = FirebaseAuth.instance;
+  FirebaseAuth firebaseauth = FirebaseAuth.instance;
 
-  // login() async {
-  //   User? currentUser;
+  login() async {
+    User? currentUser;
 
-  // await firebaseauth
-  //     .signInWithEmailAndPassword(
-  //         email: emailController.text.trim(),
-  //         password: passwordController.text.trim())
-  //     .then((auth) {
-  //   currentUser = auth.user;
-  // }).catchError((error) {
-  //   ScaffoldMessenger.of(context).showSnackBar(
-  //     SnackBar(
-  //       backgroundColor: Colors.red,
-  //       content: Text(error.toString()),
-  //     ),
-  //   );
-  // });
-  // if (currentUser != null) {
-  //   ScaffoldMessenger.of(context).showSnackBar(
-  //     const SnackBar(
-  //       backgroundColor: Colors.green,
-  //       content: Text('Login successful'),
-  //     ),
-  //   );
-  //     Navigator.push(
-  //       context,
-  //       MaterialPageRoute(
-  //         builder: (context) => const BottomnavScreen(),
-  //       ),
-  //     );
-  //   } else {
-  //     ScaffoldMessenger.of(context).showSnackBar(
-  //       const SnackBar(
-  //         backgroundColor: Colors.red,
-  //         content: Text('Not logged in'),
-  //       ),
-  //     );
-  //   }
-  // }
+    await firebaseauth
+        .signInWithEmailAndPassword(
+            email: emailController.text.trim(),
+            password: passwordController.text.trim())
+        .then((auth) {
+      currentUser = auth.user;
+    }).catchError((error) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          backgroundColor: Colors.red,
+          content: Text(error.toString()),
+        ),
+      );
+    });
+    if (currentUser != null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          backgroundColor: Colors.green,
+          content: Text('Login successful'),
+        ),
+      );
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const BottomnavScreen(),
+        ),
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          backgroundColor: Colors.red,
+          content: Text('Not logged in'),
+        ),
+      );
+    }
+  }
 
   bool isObscure = true;
 
@@ -93,7 +95,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         height: 120,
                         width: 120,
                         child: Image.asset(
-                          'assets/images/Fashion Nova.png',
+                          'assets/images/Logo.png',
                         ),
                       ),
                     ],
@@ -156,26 +158,21 @@ class _LoginScreenState extends State<LoginScreen> {
                   GestureDetector(
                     onTap: () {
                       if (_formKey.currentState!.validate()) {
-                        setState(() {
-                          isLoading = true;
-                        });
-                        AuthService()
-                            .login(
-                          email: emailController.text.trim(),
-                          password: passwordController.text.trim(),
-                        )
-                            .then((value) {
-                          setState(() {
-                            isLoading = false;
-                          });
-                        });
-                        //     .then((_) {
+                        // setState(() {
+                        //   isLoading = true;
+                        // });
+                        // AuthService()
+                        //     .login(
+                        //   email: emailController.text.trim(),
+                        //   password: passwordController.text.trim(),
+                        // )
+                        //     .then((value) {
                         //   setState(() {
                         //     isLoading = false;
                         //   });
                         // });
                       }
-                      // login();
+                      login();
                     },
                     child: LongButtonContainer(
                       buttonName: isLoading == true ? 'Loading...' : 'Login',
