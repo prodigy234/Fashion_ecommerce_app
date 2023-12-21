@@ -40,7 +40,7 @@ class FirstAuthPage extends StatelessWidget {
                     },
                     child: const LongButtonContainer(
                       buttonName: 'Login',
-                      buttonColor: Colors.white,
+                      buttonColor:  Color(0xFFFBE204),
                     ),
                   ),
                   const SizedBox(height: 10),
@@ -53,10 +53,9 @@ class FirstAuthPage extends StatelessWidget {
                         ),
                       );
                     },
-                    child: LongButtonContainer(
+                    child: const LongButtonContainer(
                       buttonName: 'Sign Up',
-                      buttonBorder: (Border.all(color: Colors.white)),
-                      buttonTextColor: Colors.redAccent,
+                      buttonTextColor: Colors.black,
                     ),
                   )
                 ],

@@ -2,7 +2,7 @@
 
 import 'package:fashion_ecommerce_app/features/authentication/auth_screens/sign_up_screen.dart';
 import 'package:fashion_ecommerce_app/features/screens/category_screen.dart';
-import 'package:fashion_ecommerce_app/features/services/auth_service.dart';
+
 import 'package:fashion_ecommerce_app/features/widgets/auth_input_text_field_widget.dart';
 import 'package:fashion_ecommerce_app/features/widgets/long_button_widget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
