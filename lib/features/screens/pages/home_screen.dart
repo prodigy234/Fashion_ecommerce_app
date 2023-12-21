@@ -1,7 +1,6 @@
 import 'package:fashion_ecommerce_app/features/services/get_products_service.dart';
 import 'package:flutter/material.dart';
 
-
 class HomeScreen extends StatefulWidget {
   const HomeScreen({
     super.key,
@@ -16,6 +15,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.yellow,
       appBar: AppBar(
         bottomOpacity: 0,
         backgroundColor: Colors.white,
